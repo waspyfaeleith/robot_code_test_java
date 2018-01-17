@@ -94,8 +94,8 @@ public class RobotTest {
 
     @Test
     public void addWarningScentToGrid() {
-        robot1.addWarningScent(1,4);
-        assertTrue(robot1.getGrid().hasWarningScent(1,4));
+        robot1.addWarningScent(1,3);
+        assertTrue(robot1.getGrid().hasWarningScent(1,3));
     }
 
     @Test
