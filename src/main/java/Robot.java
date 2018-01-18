@@ -8,11 +8,13 @@ public class Robot {
     private char orientation;
     private Grid grid;
     private HashMap<Character, Integer[]> moves;
+    boolean lost;
 
     public Robot(String initialPosition, Grid grid) {
         this.setupPosition(initialPosition);
         this.setUpMoves();
         this.grid = grid;
+        this.lost = false;
     }
 
     private void setupPosition(String pos) {
@@ -39,13 +41,12 @@ public class Robot {
     }
 
     public String getPosition() {
-        boolean lost = false;
-        if (!this.isOnGrid()) {
+        if (this.lost) {
             this.reinstatePreviousCoords();
-            lost = true;
         }
+        
         String pos = xPosition + " " + yPosition + " " + orientation;
-        return lost ? pos + " LOST" : pos;
+        return this.lost ? pos + " LOST" : pos;
     }
 
     public boolean isOnGrid() {
@@ -150,6 +151,7 @@ public class Robot {
         for (char instruction : instructionArray) {
             if (instruction == 'F') {
                 if (!this.move(instruction)) {
+                    this.lost = true;
                     return;
                 }
             } else {
