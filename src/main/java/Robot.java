@@ -39,8 +39,13 @@ public class Robot {
     }
 
     public String getPosition() {
+        boolean lost = false;
+        if (!this.isOnGrid()) {
+            this.reinstatePreviousCoords();
+            lost = true;
+        }
         String pos = xPosition + " " + yPosition + " " + orientation;
-        return this.isOnGrid() ? pos : pos + " LOST";
+        return lost ? pos + " LOST" : pos;
     }
 
     public boolean isOnGrid() {
