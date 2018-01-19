@@ -13,18 +13,22 @@ public class Runner {
         int x = Integer.parseInt(dims[0]);
         int y = Integer.parseInt(dims[1]);
 
-        Grid grid = new Grid(x, y);
+            Grid grid = new Grid(x, y);
 
+        do {
+            System.out.println("Enter the robot start position and orientation: ");
+            String pos = in.nextLine();
+            if (pos.equals("q")) break;
+            Robot robot = new Robot(pos, grid);
 
-        System.out.println("Enter the robot start position and orientation: ");
-        String pos = in.nextLine();
-        Robot robot = new Robot(pos, grid);
+            System.out.println("Enter the robot instructions: ");
+            String instructions = in.nextLine();
+            if (instructions.equals("q")) break;
+            robot.carryOutInstructions(instructions);
 
-        System.out.println("Enter the robot instructions: ");
-        String instructions = in.nextLine();
-        robot.carryOutInstructions(instructions);
+            System.out.println(robot.getPosition());
+        } while (true);
 
-        System.out.println(robot.getPosition());
-
+        System.out.println("Byee...");
     }
 }
